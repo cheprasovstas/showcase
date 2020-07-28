@@ -1,0 +1,12 @@
+Django==2.2.14
+django-rest-registration
+django-phonenumber-field
+django-money
+django-filter
+django-registration
+psycopg2
+psycopg2-binary
+social-auth-app-django
+#django-notifications-hq
+#install django-apscheduler
+#django-push-notifications

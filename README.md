@@ -1,5 +1,5 @@
 libs:
-python -m pip install Django==2.2.7
+python -m pip install Django==2.2.14
  -- URL=https://django-rest-registration.readthedocs.io/en/latest/index.html --pip install django-rest-registration
  -- URL=https://github.com/stefanfoulis/django-phonenumber-field  --pip install django-phonenumber-field
  -- URL=https://github.com/django-money/django-money --pip install django-money
@@ -32,5 +32,5 @@ python -m pip install Django==2.2.7
                         set SERVER_PORT=8000
                         set DATABASE_HOST=check-in.vps-cheprasov.host4g.ru
                         set DATABASE_PORT=5432
-                        set DATABASE_USER=checkin
+                        set DATABASE_USER=showcase
                         set DATABASE_PASSWORD=!QW@1qw2
