@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block head %}
+    {% load staticfiles %}
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="357013688268-suer89ruerok5v05m28ab38gfffrs656.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
+{% endblock %}
+
+{% block breadcrums %}
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Check-In</a></li>
+        <li class="breadcrumb-item" aria-current="page">{% trans "Login" %}</li>
+      </ol>
+    </nav>
+{% endblock %}
+{% block content %}
+<form method="post" action=".">
+  {% csrf_token %}
+  <a href="{% url "social:begin" "google-oauth2" %}" class="btn btn-danger">
+      <i class="fa fa-google">
+      </i> Sign in with <b>Google</b>
+  </a>
+  <hr class="style14">
+  <div class="form-group">
+    {{ form.username.errors }}
+    <label for="{{ form.username.id_for_label }}">{% trans "Username" %}</label>
+    {{ form.username }}
+  </div>
+  <div class="form-group">
+    {{ form.password.errors }}
+    <label for="{{ form.password.id_for_label }}">{% trans "Password" %}</label>
+    {{ form.password }}
+  </div>
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-success login-btn">{% trans 'Sign in' %}</button>
+  </div>
+
+ </form>
+
+<p>{% trans "Forgot password" %}? <a href="{% url 'password_reset' %}">{% trans "Reset it" %}</a>!</p>
+<p>{% trans "Not member" %}? <a href="{% url 'django_registration_register' %}">{% trans "Register" %}</a>!</p>
+
+{% endblock %}

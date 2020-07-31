@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <h2>{% trans "Invitation List" %}</h2>
+  {% if invitations %}
+  <ul>
+    {% for invitation in invitations %}
+      <li>
+        <a href="{{ invitation.id }}">{{ invitation.id }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no invitations.</p>
+  {% endif %}
+{% endblock %}

@@ -49,6 +49,13 @@ INSTALLED_APPS = [
     'djmoney',
     'rest_framework',
     'rest_framework.authtoken',
+    'phonenumber_field',
+#    'rest_registration',
+    'django_filters',
+#    'social_django',
+#    'notifications',
+#    'django_apscheduler',
+#    'push_notifications',
 ]
 
 MIDDLEWARE = [
@@ -139,6 +146,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = (
+    os.path.join(BASE_DIR, 'media')
+)
 
 MEDIA_URL = '/media/'

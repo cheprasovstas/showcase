@@ -1,0 +1,58 @@
+{% extends "base.v2.html" %}
+{% load i18n %}
+
+{% block head %}
+    {% load staticfiles %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
+
+{% endblock %}
+
+{% block content %}
+    <div>
+            <div class="content_block">
+                <a  class="Footnote-link float-left" href="{% url 'profile' %}">{% trans "Cancel" %}</a>
+                <div class="ava"></div>
+            </div>
+
+            <form method="post" class="needs-validation post-form" novalidate>
+            {% csrf_token %}
+                <div class="white_content_block">
+                    <div class="">
+                        <p class="Body-bold">{% trans "Profile" %}</p>
+                        <p class="">{% trans "Used for substitution in booking" %}</p>
+                       <div class="form-group mt-5">
+                            {{ form.first_name }}
+                            <label class="Body-1 form-control-placeholder" for="{{ form.first_name.id_for_label }}">{% trans "Your name" %}</label>
+                            {{ form.first_name.errors }}
+                            <div class="invalid-feedback">
+                                {% trans "Your name required" %}
+                            </div>
+                        </div>
+                        <!--div class="form-group">
+                            {{ form.last_name }}
+                            <label class="form-control-placeholder" for="{{ form.last_name.id_for_label }}">{% trans "Last name" %}</label>
+                            {{ form.last_name.errors }}
+                        </div-->
+                         <div class="form-group">
+                            {{ form.phone }}
+                            <label class="Body-1 form-control-placeholder" for="{{ form.phone.id_for_label }}">{% trans "Contact phone number" %}</label>
+                            {{ form.phone.errors }}
+                             <div class="invalid-feedback">
+                                {% trans "Contact phone number required, format: +1234567890" %}
+                            </div>
+                             <script>
+                                      var phones = [{ "mask": "+7(###) ###-##-##"}];
+                                      $('#id_phone').inputmask({
+                                                mask: phones,
+                                                greedy: false,
+                                                definitions: { '#': { validator: "[0-9]", cardinality: 1}} });
+                            </script>
+                       </div>
+                       <div class="row justify-content-center">
+                            <button type="submit" class="btn_conf">{% trans "Confirm" %}</button>
+                       </div>
+                    </div>
+                </div>
+            </form>
+    </div>
+{% endblock %}

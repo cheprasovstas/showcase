@@ -1,0 +1,4 @@
+{% load i18n %}
+{% block particip_count %}
+    <span class="badge badge-secondary badge-warning">{{ event.currParticipCount }}{% if event.maxParticipCount != -1 %}({{ event.maxParticipCount }}){% endif %}</span>
+{% endblock %}

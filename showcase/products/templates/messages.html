@@ -1,0 +1,37 @@
+{% load i18n %}
+    {% if messages %}
+      {% for message in messages %}
+        {% if message.tags == "info" %}
+          <div class="alert alert-info text-center" role="alert">
+              {{ message }}
+              <!--button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button-->
+          </div>
+        {% endif %}
+        {% if message.tags == "warning" %}
+          <div class="alert alert-warning" role="alert">
+              {{ message }}
+          </div>
+        {% endif %}
+        {% if message.tags == "error" %}
+          <div class="alert alert-danger" role="alert">
+              {{ message }}
+          </div>
+        {% endif %}
+        {% if message.tags == "success" %}
+          <div class="alert success" role="alert">
+              {{ message }}
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+<script>
+    window.setTimeout(function() {
+        $(".alert").fadeTo(900, 0).slideUp(900, function(){
+            $(this).remove();
+        });
+    }, 3000);
+</script>
+

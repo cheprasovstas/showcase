@@ -1,0 +1,157 @@
+{% extends "base.v2.html" %}
+{% load i18n %}
+{% load djmoney %}
+{% money_localize money %}
+
+{% block top_toolbar %}
+    <div class="row align-items-center top_menu">
+        <div class="booking">
+            {% if request.session.calendar %}
+                <a href="{% url 'calendar' request.session.calendar %}">
+                    <div class="btn_top_menu">{% trans "Booking" %}</div>
+                </a>
+            {% else %}
+                    <div class="btn_top_menu">{% trans "Booking" %}</div>
+            {% endif %}
+            <a href="{% url 'profile' %}">
+                <div class="btn_top_menu active">{% trans "My bookings" %}</div>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="top_profile">
+        <div class="content_block">
+            <div class="avatar"><img src="/static/img/avatar.png" alt=""></div>
+            <div class="Title-2 name_profile">
+                {{ user.first_name }}
+                <br>
+                {{ user.last_name }}
+            </div>
+            <div class="Footnote mt-2 phone">
+                {{ user.phone }}
+            </div>
+                <script>
+                    $(".phone").text(function(i, text) {
+                        text = text.replace(/(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/, "$1 $2 $3-$4-$5");
+                        return text;
+                    });
+                </script>
+                <div class="mt-4">
+                    <a class="Footnote-link " href="{% url 'profile_edit' %}">{% trans "Edit profile" %}</a>
+                    <a class="logout_profile btn_round" data-toggle="collapse" href="#collapseLogout" aria-expanded="false">
+                        <img class="logout_open" src="/static/img/ic-logout@2x.png" alt="">
+                        <img class="logout_close" src="/static/img/ic-cross@2x.png" alt="">
+                    </a>
+                </div>
+
+                <div id="collapseLogout" class="logout_block collapse">
+                    <a href="{% url 'logout' %}?next=/checkin/profile/login">
+                        <button class="btn_blue_link">{% trans "Logout" %}</button>
+                    </a>
+
+                    <button class="btn_gray_link"  data-toggle="modal"  data-target="#deleteAccountModal">{% trans "Delete account" %}</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog white_card" role="document">
+                            <div class="oops_cancel"></div>
+                            <h1 class="Title-1 text-center">{% trans "Delete account?" %}</h1>
+                            <p class="Footnote-1 text-center mt-1 mb-5 pl-3 pr-3">{% trans "Are you sure you want to delete account?" %}</p>
+                            <button type="button" id="btn_deleteAccountModal" class="btn_blue">{% trans "Delete" %}</button>
+                            <button type="button" class="btn_blue_link" data-dismiss="modal">{% trans "Cancel" %}</button>
+                            <script>
+                                $("#btn_deleteAccountModal").click(function (e) {
+                                  location.href = '{% url 'logout' %}?next=/checkin/profile/login';
+                                })
+                            </script>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="container">
+            {% if participants or participants_history %}
+                {% for participant in participants %}
+                <div class="white_card">
+                    <a href="{% url 'participants' %}{{ participant.id }}">
+                        <div class="selected_items summary">
+                            <div class="caption_item Body-bold">{{ participant.startDate|date:"F d, G:i"  }}
+                                <div class="d1"></div>
+                            </div>
+                            {% if participant.aggregation.price %}
+                                <div class="price_item Body-bold">{% money_localize participant.aggregation.price participant.aggregation.price_currency %}</div>
+                            {% endif %}
+                        </div>
+                        {% for option in participant.options.all %}
+                            <div class="selected_items">
+                                <div class="caption_item Footnote">{{ option.name }}</div>
+                                <div class="price_item Footnote">{{ option.price}}</div>
+                            </div>
+                        {% endfor %}
+                        <hr class="hr_left details">
+                    </a>
+                    <p class="Footnote">{% trans "Address" %}: {{ participant.event.location }}</p>
+                    <a href="{% url 'participant_ics' pk=participant.id %} ">
+                        <button class="btn_blue_link mt-4">{% trans "Add to calendar" %}</button>
+                    </a>
+                    <button id="{{ participant.id }}" class="btn_gray_link"  data-toggle="modal"  data-target="#cancelBookingModal">{% trans "Cancel booking" %}</button>
+                </div>
+                {% endfor %}
+                <!-- Modal -->
+                <div class="modal fade" id="cancelBookingModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog white_card text-center" role="document">
+                        <div class="oops_cancel"></div>
+                        <h1 class="Title-1 text-center">{% trans "Cancel the booking?" %}</h1>
+                        <p class="Footnote-1 text-center mt-1 mb-5 pl-3 pr-3">{% trans "Are you sure you want to cancel the booking" %}</p>
+                        <form id="cancelBookingModalForm" action="checkout"  method="post">
+                        {% csrf_token %}
+                            <button type="submit" id="btn_cancelBookingModal" class="btn_blue btn_cancelBookingModal">{% trans "Yes, cancel" %}</button>
+                        </form>
+                        <button type="button" class="btn_blue_link" data-dismiss="modal">{% trans "No" %}</button>
+                        <script>
+                            $("#cancelBookingModal").on('show.bs.modal', function(e) {
+                                id = e.relatedTarget.id;
+                                var form = $("#cancelBookingModalForm")
+                                form[0].setAttribute("action", "{% url 'participants' %}" + id + '/checkout');
+                            });
+                        </script>
+                    </div>
+                </div>
+                {% if participants_history %}
+                <div class="pb-0 content_block">
+                    <p class="Title-2">{% trans "Archive" %}</p>
+                {% endif %}
+                </div>
+                {% for participant in participants_history %}
+                <div class="white_card">
+                    <div class="selected_items summary">
+                        <div class="caption_item Body-bold">{{ participant.startDate|date:"F d, G:i"  }}</div>
+                        {% if participant.aggregation.price %}
+                            <div class="price_item Body-bold">{% money_localize participant.aggregation.price participant.aggregation.price_currency %}</div>
+                        {% endif %}
+                    </div>
+                    {% for option in participant.options.all %}
+                        <div class="selected_items">
+                            <div class="caption_item Footnote">{{ option.name }}</div>
+                            <div class="price_item Footnote">{{ option.price }}</div>
+                        </div>
+                    {% endfor %}
+                    <hr class="hr_left details">
+                    <p class="Footnote">{% trans "Address" %}: {{ participant.event.location }}</p>
+                    <button id="{{ participant.event.eventType.id }}" class=" mt-4 btn_gray_link new-booking">{% trans "Create new booking" %}</button>
+                </div>
+                {% endfor %}
+                            <script>
+                                $(".new-booking").click(function (e) {
+                                  location.href = '{% url 'calendars' %}'+this.id;
+                                })
+                            </script>
+            {% else %}
+                <div class="white_card text-center">
+                    <div class="oops_empty_profile"></div>
+                    <p class="Footnote-1">{% trans "No reservations here" %}</p>
+                </div>
+            {% endif %}
+    </div>
+{% endblock %}

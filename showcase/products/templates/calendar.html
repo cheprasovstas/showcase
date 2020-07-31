@@ -1,0 +1,386 @@
+{% extends "base.v2.html" %}
+{% load i18n %}
+
+{% block head %}
+    {% load staticfiles %}
+
+    <link rel="stylesheet" href="{% static 'js/jquery-ui-1.12.1/jquery-ui.css' %}">
+
+    <!-- Language script -->
+    <script src="{% static 'js/i18n/datepicker-ru.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/i18n/jquery.localisation.js' %}"></script>
+
+    <link href="{% static 'mysite/css/calendar.css' %}" rel="stylesheet" />
+    <script src="{% static 'mysite/js/calendar.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
+
+    <meta property="og:title" content="{{ event_type.title }}" />
+    <meta property="og:description" content="{{ event_type.description }}" />
+
+    <meta property="title" content="{{ event_type.title }}" />
+    <meta property="description" content="{{ event_type.description }}" />
+
+{% endblock %}
+
+{% block top_toolbar %}
+    <div class="row align-items-center top_menu">
+        <div class="booking">
+            <a href="{% url 'calendars' %}">
+                <div class="btn_top_menu active">{% trans "Booking" %}</div>
+            </a>
+
+            <a href="{% url 'profile' %}">
+                <div class="btn_top_menu">{% trans "My bookings" %}</div>
+            </a>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid align-items-center text-center top_steps">
+        <div class="stepwizard">
+            <div class="stepwizard-row setup-panel">
+               <div class="stepwizard-step">
+                <a href="#step-1" role="button" class="step-no-done step-first current">
+                    <div class="btn-circle">1</div>
+                    <p>{% trans "Service" %}</p>
+                </a>
+              </div>
+              <div class="stepwizard-step">
+                <a href="#step-2" role="button" class="step-no-done" disabled="disabled">
+                    <div class="btn-circle">2</div>
+                    <p>{% trans "Date" %}</p>
+                </a>
+              </div>
+              <div class="stepwizard-step">
+                <a href="#step-3" role="button" class="step-no-done" disabled="disabled">
+                    <div class="btn-circle">3</div>
+                    <p>{% trans "Contacts" %}</p>
+                </a>
+              </div>
+            </div>
+        </div>
+    </div>
+
+
+    <form method="post" class="needs-validation post-form" novalidate>
+    {% csrf_token %}
+    <div class="setup-content" id="step-1">
+    {{ form.event_type_id }}
+        <div>
+            <div class="w-768 row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="pb-0 content_block">
+                        <p class="Body-bold">{{ event_type.title }}</p>
+                        <a class="btn_round calendar-description" data-toggle="collapse" data-target="#viewdetails" aria-expanded="false">
+                            <img class="logout_open" src="/static/img/ic-arrow-down.svg" alt="">
+                            <img class="logout_close" src="/static/img/ic-arrow-up.svg" alt="">
+                        </a>
+                        <p class="Footnote collapse" id="viewdetails">{{ event_type.description }}</p>
+                        <script>
+                            $('.collapse').on('shown.bs.collapse', function(){
+                            $(this).parent().find(".fa-chevron-down").removeClass("fa-chevron-down").addClass("fa-chevron-up");
+                            }).on('hidden.bs.collapse', function(){
+                            $(this).parent().find(".fa-chevron-up").removeClass("fa-chevron-up").addClass("fa-chevron-down");
+                            });
+                        </script>
+                        <hr class="hr_left">
+                        <p class="Footnote">{% trans "Address" %}: {{ event_type.location }}</p>
+                        <!--hr class="hr_left">
+                        <div id="options-selected">
+                            <div class="selected_items">
+                                <div class="caption_item Footnote-bold">Hair cut</div>
+                                <div class="price_item Footnote-bold">$15</div>
+                                <div class="unselect"></div>
+                            </div>
+                        </div-->
+                    </div>
+
+                </div>
+                 <div class="col-md-6 col-sm-12">
+                    <div class="content_block form-group">
+                        <div class="invalid-feedback"> {% trans "At least one option is required" %}</div>
+                        {% for value, label, option in form.options.field.choices %}
+                            <div class="select_item">
+                                <label for="id_options_{{ value }}">
+                                    <input type="checkbox" name="options" value="{{ value }}" id="id_options_{{ value }}">
+                                    <div class="caption_item Footnote-bold">{{ option.name }}</div>
+                                    <div class="price_item Footnote-1">{{ option.price }}</div>
+                                </label>
+                            </div>
+                        {% endfor %}
+                        <div class="row mt-4"></div>
+                        <script>
+                             $('.select_item input').click(function(){
+                                if($(this).is(":checked")) {
+                                    option = $(this)[0].parentElement;
+                                    option.classList.add("checked");
+                                    appendOption(option);
+                                } else {
+                                    option = $(this)[0].parentElement;
+                                    option.classList.remove("checked");
+                                    removeOption(option);
+                                }
+                             });
+
+                             function appendOption(option) {
+                              var block = '<div id='+option.htmlFor+' class="selected_items">'+
+                                            option.innerHTML+
+                                          '</div>'
+                              $( "#options-sum" ).append(block);
+                             }
+
+                             function removeOption(option) {
+                              $( "#options-sum #"+option.htmlFor ).remove();
+                             }
+                         </script>
+                        <button type="button" class="btn_next nextBtn">{% trans "Next" %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="setup-content" id="step-2">
+    {{ form.startDate }}
+    {{ form.endDate }}
+    {{ form.offset }}
+    <div class="invalid-feedback">
+        {% trans "Date time required" %}
+    </div>
+        <div>
+            <div class="w-768 row">
+                <div class="col-md-6 col-sm-12">
+                    <script>
+                        var calendarGlob = {}
+
+                        $(window).on('load', function() {
+                            updateFirstDay();
+                        });
+
+                        function updateFirstDay() {
+                            first = $("#datepicker").datepicker('getDate');
+                            updateMonth(first.getMonth() + 1,first.getFullYear())
+                        }
+
+                        function updateMonth(month,year) {
+                          var api_url = "{{ request.path }}"
+
+                          first = $("#datepicker").datepicker('getDate');
+                          var offset = first.getTimezoneOffset();
+
+                          if (calendarGlob[year] && calendarGlob[year][month - 1]) {
+                            delete calendarGlob[year][month - 1];
+                          };
+
+                          $.ajax({
+                            url: api_url+'eventfeeds',
+                            data: {"month":month,"year":year,"offset":offset},
+                            dataType: 'json',
+                            success: function(events){
+                              jQuery.each(events, function(index, item) {
+                                    //d = new Date(item.start)
+                                    d = moment(item.start).toDate()
+                                    yearObj = calendarGlob[d.getFullYear()];
+                                    if (!yearObj) {
+                                      yearObj = {};
+                                      calendarGlob[d.getFullYear()] = yearObj
+                                    };
+                                    monthObjc = yearObj[d.getMonth()];
+                                    if (!monthObjc) {
+                                      monthObjc = {};
+                                      yearObj[d.getMonth()] = monthObjc;
+                                    }
+                                    dayObj = monthObjc[d.getDate()];
+                                    if (!dayObj) {
+                                      dayObj = [];
+                                      monthObjc[d.getDate()] = dayObj;
+                                    }
+                                    eventObj = {id:item.id, value:d.getHours()+':'+(d.getMinutes() < 10 ? '0' : '') + d.getMinutes(), start:item.start};
+                                    if (!dayObj.includes(eventObj)) {
+                                        dayObj.push(eventObj);
+                                    }
+                              });
+                              $("#datepicker").datepicker('refresh');
+//                              curr_date = $("#datepicker").datepicker('getDate');
+
+//                              if ((month - 1) == curr_date.getMonth() && year == curr_date.getFullYear()) {
+//                                  updDay(curr_date.getDate(),curr_date.getMonth(),curr_date.getFullYear())
+//                              }
+//                              else {
+//                                  //Update times block
+//                                  $("#times-block").collapse("hide");
+//                                  $("#sel-date").text("")
+//                                  $("#times-block .time_pick").remove();
+//                              }
+                            }
+                          });
+                        }
+
+                        function updDay(day,month,year) {
+                              moment.locale("{{ LANGUAGE_CODE }}")
+                              $('#sel-date').text(moment(year+"-"+(month + 1)+"-"+day, "YYYY-MM-DD").format('dddd, MMMM DD'))
+
+                              $( "#times-block .time_pick" ).remove();
+
+                              if((typeof(calendarGlob[year]) === "undefined")
+                                || (typeof(calendarGlob[year][month]) === "undefined")
+                                || (typeof(calendarGlob[year][month][day]) === "undefined")) {
+                                return
+                              }
+                              //Update times block
+                              calendarGlob[year][month][day].forEach(function(eventObj){
+                                  appendTime(eventObj);
+                              })
+                              $( "#times-block" ).collapse('show');
+
+                              $( "#times-block .time_pick" ).click(function(){
+                                    $('#id_id').val(this.id);
+                                    //dt = $("#datepicker").datepicker('getDate');
+
+                                    moment.locale("{{ LANGUAGE_CODE }}");
+                                    dt = moment(this.getAttribute('start'));
+                                    $('#date-sum').text(dt.format('MMMM DD, HH:mm'));
+                                    $('#id_offset').val(dt.utcOffset());
+                                    dtUtc = moment.utc(this.getAttribute('start'));
+                                    $('#id_startDate').val(dtUtc.format('YYYY-MM-DD HH:mm'));
+                                    $('#id_endDate').val(dtUtc.format('YYYY-MM-DD HH:mm'));
+                                    var curStep = $(this).closest(".setup-content"),
+                                        curStepBtn = curStep.attr("id"),
+                                        curStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]')
+                                        nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+                                        curInputs = curStep.find("input[type='text'],input[type='url']"),
+                                        isValid = true;
+
+                                    $(".form-group").removeClass("has-error");
+                                    for(var i=0; i<curInputs.length; i++){
+                                        if (!curInputs[i].validity.valid){
+                                            isValid = false;
+                                            $(curInputs[i]).closest(".form-group").addClass("has-error");
+                                        }
+                                    }
+
+                                    if (isValid) {
+                                        curStepWizard.addClass('step-done').removeClass('step-no-done');
+                                        nextStepWizard.removeAttr('disabled').trigger('click');
+                                    }
+                              });
+
+                        }
+
+                        function appendTime(eventObj) {
+                          var block = '<button id='+eventObj.id+' start='+eventObj.start+' class="time_pick nextBtn pull-right" type="button">'+eventObj.value+'</button>';
+                          $( "#times-block" ).append(block);
+                        }
+                    </script>
+                    <script>
+                    $.datepicker.setDefaults( $.datepicker.regional[ "{{ LANGUAGE_CODE }}" ] );
+                    $(function() {
+                            $("#datepicker").datepicker({
+                                minDate: 0,
+                                dateFormat: 'yy-mm-dd',
+                                onSelect: function(dateText, inst) {
+                                    updDay(inst.selectedDay,inst.selectedMonth,inst.selectedYear)
+                                    // element which needs to be scrolled to
+                                    var element = document.querySelector("#times-block");
+                                    // scroll to element
+                                    element.scrollIntoView();
+                                },
+                                onChangeMonthYear:  function(year, month, inst) {
+                                    updateMonth(month,year);
+                                },
+                                beforeShowDay: function(date) {
+                                    year = date.getFullYear();
+                                    month = date.getMonth();
+                                    day = date.getDate();
+                                    res = (typeof(calendarGlob[year]) != "undefined")
+                                            && (typeof(calendarGlob[year][month]) != "undefined")
+                                            && (typeof(calendarGlob[year][month][day]) != "undefined")
+                                    return [res, '', ''];
+                                }
+
+                            });
+                     });
+                    </script>
+                    <div id="datepicker" class="white_content_block mt-2"></div>
+                 </div>
+
+                <div class="col-md-6 col-sm-12">
+                    {{ form.id }}
+                    {{ form.id.errors }}
+                    <div id="times-block" class="mt-2 white_content_block times-block collapse">
+                        <p id="sel-date" class="sel-date"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="setup-content" id="step-3">
+        <div class="w-768">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="content_block details">
+                        <p class="Body-bold">{% trans "Booking details" %}</p>
+                        <hr class="hr_left">
+                        <div class="summary mb-3">
+                            <div  id="date-sum" class="Footnote-bold caption_item">
+                                October 10, 12:00
+                            </div>
+                        </div>
+
+                        <div id="options-sum">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                        <div class="white_content_block">
+                            <p class="Body-bold">{% trans "Fill your contacts" %}</p>
+
+                              <div class="mt-4 form-group">
+                                  {{ form.name }}
+                                  <label class="Body-1 form-control-placeholder" for="{{ form.name.id_for_label }}">{% trans "Your name" %}</label>
+                                  {{ form.name.errors }}
+                                  <div class="invalid-feedback">
+                                      {% trans "Your name required" %}
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  {{ form.phone }}
+                                  <label class="Body-1 form-control-placeholder" for="{{ form.phone.id_for_label }}">{% trans "Contact phone number" %}</label>
+                                  {{ form.phone.errors }}
+                                  <div class="invalid-feedback">
+                                      {% trans "Contact phone number required, format: +1234567890" %}
+                                  </div>
+                                  <script>
+                                      var phones = [{ "mask": "+7(###) ###-##-##"}];
+                                      $('#id_phone').inputmask({
+                                                mask: phones,
+                                                greedy: false,
+                                                definitions: { '#': { validator: "[0-9]", cardinality: 1}} });
+                                  </script>
+                              </div>
+                              <div class="form-group">
+                                  {{ form.comment }}
+                                  <label class="Body-1 form-control-placeholder" for="{{ form.comment.id_for_label }}">{% trans "Comment" %}</label>
+                                  {{ form.comment.errors }}
+                              </div>
+
+                            <p class="Caption terms">{% trans "By continuing you agree to" %} <a data-toggle="modal" href="#" data-target="#termsModal">{% trans "Terms of Service" %}</a></p>
+                            <button type="submit" class="btn_conf">{% trans "Confirm" %}</button>
+                        </div>
+
+                        <!-- Modal -->
+                        <div id="termsModal" class="modal" role="dialog" aria-hidden="true">
+                            <div class="w-768 content_block">
+                            <h2>Terms and conditions<br><br></h2>
+                            <div  type="button" class="terms_close" data-dismiss="modal"  aria-label="Close"></div>
+                                {% include "terms/terms.html" %}
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </form>
+  <a href="{{ APP_MEDIA_URL }}" class="Caption-link copyright mb-3">{% trans "Work on" %} Weekl</a>
+{% endblock %}

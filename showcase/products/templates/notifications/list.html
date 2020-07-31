@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+    <div class="content">
+      <ul class="notifications">
+        {% for notice in notifications %}
+          {% include 'notifications/notice.html' %}
+        {% endfor %}
+      </ul>
+
+    </div>
+
+{% endblock %}
+
+

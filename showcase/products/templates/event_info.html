@@ -1,0 +1,14 @@
+{% load i18n %}
+
+    <h2>{{ event.title }} <span class="badge badge-secondary badge-warning">{% include "widgets/event_particip_count.html" with event=event %}</span></h2>
+        <dl class="row">
+        <dt class="col-sm-3">{% trans "Date" %}:</dt>
+        <dt class="col-sm-9"> {{ event.startDate }} {{ event.startTime }}</dt>
+            {% if event.location %}
+        <dt class="col-sm-3">{% trans "Location" %}:</dt>
+        <dd class="col-sm-9"> {{ event.location }}</dd>
+            {% endif %}
+        </dl>
+        {% if event.description %}
+            <small class="text-muted">{{ event.description }}</small>
+        {% endif %}
