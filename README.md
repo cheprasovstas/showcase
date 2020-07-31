@@ -14,11 +14,20 @@ python -m pip install Django==2.2.14
 # -- https://github.com/jazzband/django-ical                --pip install django-ical
 
 
-                        # showcase
-                        DATABASE_HOST=check-in.vps-cheprasov.host4g.ru
-                        DATABASE_PORT=5432
-                        DATABASE_USER=showcase
-                        DATABASE_PASSWORD=!QW@1qw2
+GIT:   
+    rm -rf /var/showcase/
+    mkdir /var/showcase
+    cd /var/showcase
+    git clone -b develop https://cheprasovstas:NQR4Cw6JwrVcJuM@github.com/cheprasovstas/showcase.git
+GIT:  pull
+    cd /var/showcase/showcase;
+    git fetch origin develop;
+    git pull origin develop;
+
+django commands start:
+                cd /var/showcase/showcase/showcase/;
+                source /root/djangoenv/bin/activate;
+                python manage.py runserver 0.0.0.0:9000 &
 
                     env:
                         export SERVER_NAME=weekl-app.com;
