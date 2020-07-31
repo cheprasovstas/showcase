@@ -1,0 +1,36 @@
+.form-group {
+  position: relative;
+}
+
+.form-control-placeholder {
+  position: absolute;
+  top: 8px;
+  transition: all 200ms;
+}
+
+input.form-control::-webkit-input-placeholder {
+  opacity: 0;
+}
+
+input.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  opacity: 0; /* Firefox */
+}
+
+.form-control:focus + .form-control-placeholder,
+.form-control:not(:placeholder-shown) + .form-control-placeholder{
+  transform: translate(0, -1.4rem) scale(0.8);
+  transform-origin: left top;
+}
+
+.placeholder_up {
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    color: #888da6;
+
+}
+
+.placeholder_up.error {
+    color: #f24024;
+}
