@@ -7,7 +7,7 @@
 
     <meta property="og:title" content="{{ product.name }}" />
     <meta property="og:description" content="{{ product.price }} {{ product.unit_price }} {{ product.description }}" />
-    <meta property="og:image" content="{{ product.image.url }}" />
+    <meta property="og:image" content="{{request.scheme}}://{{request.META.HTTP_HOST}}{{ product.image.url }}" />
 
 {% endblock %}
 
