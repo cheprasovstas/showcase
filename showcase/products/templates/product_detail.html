@@ -1,16 +1,24 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block content %}
-    <div class="row mt-2"></div>
+{% block head %}
+    {% load staticfiles %}
+    <title>{{ product.name }}</title>
 
-    <div class="card" >
+    <meta property="og:title" content="{{ product.name }}" />
+    <meta property="og:description" content="{{ product.price }} {{ product.unit_price }} {{ product.description }}" />
+    <meta property="og:image" content="{{ product.image.url }}" />
+
+{% endblock %}
+
+{% block content %}
+        <div class="card" >
+            <img class="card-img-top" src="{{ product.image.url }}" alt="IMG-PRODUCT">
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{ product.price }} {{ product.unit_price }}</h6>
                 <p><small class="text-muted">{{ product.description }}</small></p>
-                <a href="{% url 'product' product.id %}" class="btn btn-primary">{% trans "View" %}</a>
+                <a href="https://api.whatsapp.com/send?phone=79685952835&text={{ product.name }} {{ product.price }} {{ product.unit_price }} в колличестве: " target="_blank" class="btn btn-primary">{% trans "Order" %}</a>
             </div>
-    </div>
-
+        </div>
 {% endblock %}
