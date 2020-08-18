@@ -1,0 +1,44 @@
+.row {
+    display: block;
+
+}
+
+.product-list-block {
+    margin: 0 auto;
+    width: 320px;
+    padding: 16px;
+}
+
+.product-list-card{
+    float: left;
+}
+
+.product-list-card.card{
+    border: none;
+}
+
+.product-list-card .card-img-top{
+   width: 100%!important;
+   height: 160px!important;
+   object-fit: cover;
+}
+
+
+
+
+
+.product-list-card-title{
+  font-size: 13px;
+  color: #000000;
+}
+
+.product-list-card-price-unit{
+  font-size: 13px;
+  color: #888da6;
+}
+
+.product-list-card-price{
+  font-size: 17px;
+  font-weight: 600;
+  color: #000000;
+}

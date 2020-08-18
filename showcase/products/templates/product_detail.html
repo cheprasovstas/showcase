@@ -16,7 +16,8 @@
             <img class="card-img-top" src="{{ product.image.url }}" alt="IMG-PRODUCT">
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ product.price }} {{ product.unit_price }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ product.price }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ product.unit_price }}</h6>
                 <p><small class="text-muted">{{ product.description }}</small></p>
                 <a href="https://api.whatsapp.com/send?phone=79685952835&text={{ product.name }} {{ product.price }} {{ product.unit_price }} в колличестве: " target="_blank" class="btn btn-primary">{% trans "Order" %}</a>
             </div>
