@@ -12,14 +12,18 @@
 {% endblock %}
 
 {% block content %}
-        <div class="card" >
+    <div class="product-card-block">
+        <div class="product-card card" >
             <img class="card-img-top" src="{{ product.image.url }}" alt="IMG-PRODUCT">
             <div class="card-body">
-                <h5 class="card-title">{{ product.name }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ product.price }}</h6>
-                <h6 class="card-subtitle mb-2 text-muted">{{ product.unit_price }}</h6>
-                <p><small class="text-muted">{{ product.description }}</small></p>
-                <a href="https://api.whatsapp.com/send?phone=79685952835&text={{ product.name }} {{ product.price }} {{ product.unit_price }} в колличестве: " target="_blank" class="btn btn-primary">{% trans "Order" %}</a>
+                <div class="row">
+                    <div class="Body float-left col-8">{{ product.name }}</div>
+                    <div class="Body-bold float-right col-4">{{ product.price }}</div>
+                </div>
+                <div class="Footnote-1 mt-1">{{ product.unit_price }}</div>
+                <div class="Footnote-1 mt-3">{{ product.description }}</div>
             </div>
         </div>
+        <a href="https://api.whatsapp.com/send?phone=79266711468&text={{ product.name }} {{ product.price }} {{ product.unit_price }} в колличестве: " target="_blank" class="btn product-card-btn">{% trans "Order" %}</a>
+    </div>
 {% endblock %}

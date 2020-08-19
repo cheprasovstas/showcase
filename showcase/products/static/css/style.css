@@ -1,19 +1,27 @@
 .row {
-    display: block;
-
+    display: flex;
 }
+
+.card-body{
+    padding: 24px 0px;
+}
+
 
 .product-list-block {
     margin: 0 auto;
-    width: 320px;
+    max-width: 480px;
     padding: 16px;
 }
 
-.product-list-card{
-    float: left;
+.product-card-block {
+    margin: 0 auto;
+    max-width: 480px;
+    padding: 16px;
 }
 
+
 .product-list-card.card{
+    float: left;
     border: none;
 }
 
@@ -23,22 +31,63 @@
    object-fit: cover;
 }
 
+.product-card.card{
+    border: none;
+}
+
+.product-card .card-img-top{
+   width: 100%!important;
+   height: 320px!important;
+   object-fit: cover;
+}
+
+.product-card-btn{
+    width: 100%;
+    height: 44px;
+    border-radius: 28px;
+    color: #ffffff;
+    box-shadow: 0 2px 4px 0 #9297ae;
+    background-color: #242733;
+}
 
 
-
-
-.product-list-card-title{
-  font-size: 13px;
+.Body {
+  font-size: 17px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.41;
+  letter-spacing: -0.41px;
   color: #000000;
 }
 
-.product-list-card-price-unit{
+.Body-bold {
+  font-size: 17px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.41;
+  letter-spacing: -0.41px;
+  color: #000000;
+}
+
+.Footnote{
+      font-size: 13px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.38;
+      letter-spacing: -0.08px;
+      color: #000000;
+}
+
+.Footnote-1{
   font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.38;
+  letter-spacing: -0.08px;
   color: #888da6;
 }
 
-.product-list-card-price{
-  font-size: 17px;
-  font-weight: 600;
-  color: #000000;
-}

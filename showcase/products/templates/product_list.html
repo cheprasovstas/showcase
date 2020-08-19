@@ -2,24 +2,24 @@
 {% load i18n %}
 
 {% block content %}
-    <div class="row mt-2"></div>
+    <div class="mt-2"></div>
     <div class="product-list-block">
         {% for product in products %}
         {% if forloop.first %}<div class="row">{% endif %}
-        <a href="{% url 'product' product.id %}">
             <div class="card product-list-card text-center col-6" >
-                <img class="card-img-top" src="{{ product.image.url }}" alt="IMG-PRODUCT">
-                <div class="card-body">
-                    <div class="product-list-card-title">{{ product.name }}</div>
-                    <div class="product-list-card-price-unit mb-2">{{ product.unit_price }}</div>
-                    <div class="product-list-card-price">{{ product.price }}</div>
-                    <!--
-                    <p><small class="text-muted">{{ product.description }}</small></p>
-                    <a href="https://api.whatsapp.com/send?phone=79685952835&text={{ product.name }} в колличестве: " target="_blank" class="btn btn-primary">{% trans "Order" %}</a>
-                    -->
-                </div>
+                <a href="{% url 'product' product.id %}">
+                        <img class="card-img-top" src="{{ product.image.url }}" alt="IMG-PRODUCT">
+                        <div class="card-body">
+                            <div class="Footnote">{{ product.name }}</div>
+                            <div class="Footnote-1 mb-2">{{ product.unit_price }}</div>
+                            <div class="Body-bold">{{ product.price }}</div>
+                            <!--
+                            <p><small class="text-muted">{{ product.description }}</small></p>
+                            <a href="https://api.whatsapp.com/send?phone=79685952835&text={{ product.name }} в колличестве: " target="_blank" class="btn btn-primary">{% trans "Order" %}</a>
+                            -->
+                        </div>
+                </a>
             </div>
-        </a>
         {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
         {% if forloop.last %}</div>{% endif %}
         {% endfor %}
