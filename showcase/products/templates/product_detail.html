@@ -25,5 +25,6 @@
             </div>
         </div>
         <a href="https://api.whatsapp.com/send?phone=79266711468&text={{ product.name }} {{ product.price }} {{ product.unit_price }} в колличестве: " target="_blank" class="btn product-card-btn">{% trans "Заказать" %}</a>
+        <a href="{% url 'products' %}" class="btn product-card-btn mt-4">{% trans "В каталог" %}</a>
     </div>
 {% endblock %}
