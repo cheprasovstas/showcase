@@ -30,7 +30,7 @@ class ProductListView(ListView):
     template_name = 'product_list.html'
 
     def get_queryset(self):
-        if self.kwargs['user']:
+        if 'user' in self.kwargs:
             return super(ProductListView, self).get_queryset().filter(owner__username=self.kwargs['user'],  active=True)
         return super(ProductListView, self).get_queryset().filter(active=True)
 
