@@ -7,24 +7,32 @@
 
     <meta property="og:title" content="{{ product.name }}" />
     <meta property="og:description" content="{{ product.price }} {{ product.unit_price }} {{ product.description }}" />
-    <meta property="og:image" content="{{request.scheme}}://{{request.META.HTTP_HOST}}{{ product.image.url }}" />
+    {% if product.image %}
+        <meta property="og:image" content="{{request.scheme}}://{{request.META.HTTP_HOST}}{{ product.image.url }}" />
+    {% endif %}
 
 {% endblock %}
 
 {% block content %}
     <div class="product-card-block">
         <div class="product-card card" >
-            <img class="card-img-top" src="{{ product.image.url }}" alt="IMG-PRODUCT">
+            {% if product.image %}
+                <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }} ">
+            {% endif %}
             <div class="card-body">
                 <div class="row">
                     <div class="Body float-left col-8">{{ product.name }}</div>
                     <div class="Body-bold float-right col-4">{{ product.price }}</div>
                 </div>
-                <div class="Footnote-1 mt-1">{{ product.unit_price }}</div>
+                <div class="Footnote-1 mt-1 mb-3">{{ product.unit_price }}</div>
+                {% if product.owner %}
+                    <a href="https://api.whatsapp.com/send?phone={{ product.owner.username }}&text={{ product.name }} {{ product.price }} {{ product.unit_price }} в колличестве: " target="_blank" class="btn product-card-btn">{% trans "Заказать" %}</a>
+                {% endif %}
                 <div class="Footnote-1 mt-3">{{ product.description }}</div>
             </div>
         </div>
-        <a href="https://api.whatsapp.com/send?phone=79266711468&text={{ product.name }} {{ product.price }} {{ product.unit_price }} в колличестве: " target="_blank" class="btn product-card-btn">{% trans "Заказать" %}</a>
-        <a href="{% url 'products' %}" class="btn product-card-btn mt-4">{% trans "В каталог" %}</a>
     </div>
+    {% if product.owner %}
+        <a href="{% url 'showcase'  product.owner.username  %}" class="btn product-card-btn-back mt-1">{% trans "Вернуться в каталог" %}</a>
+    {% endif %}
 {% endblock %}

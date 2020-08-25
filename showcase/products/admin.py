@@ -15,8 +15,19 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = (
         ('active', admin.BooleanFieldListFilter),
     )
+    exclude = ('id', 'owner',)
     list_display = ('name', 'active', 'price', 'unit_price')
     actions = [make_published, make_unpublished]
 
+    def save_model(self, request, obj, form, change):
+        if not obj.owner:
+            obj.owner = request.user
+        obj.save()
+
+    def get_queryset(self, request):
+        qs = super(ProductAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(owner=request.user)
 
 admin.site.register(Product, ProductAdmin)

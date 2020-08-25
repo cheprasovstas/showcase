@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 import uuid
 from djmoney.models.fields import MoneyField
 
@@ -11,6 +12,7 @@ class Product(models.Model):
     unit_price = models.CharField(default='Unit price', max_length=20, help_text='Product unit price')
     active = models.BooleanField(default=True)
     image = models.ImageField(upload_to='images/products', blank=True)
+    owner = models.ForeignKey(User, help_text='Product owner', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.name

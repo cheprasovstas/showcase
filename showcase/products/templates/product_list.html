@@ -4,11 +4,18 @@
 {% block content %}
     <div class="mt-2"></div>
     <div class="product-list-block">
+        {% if not products %}
+            <div class="alert alert-primary" role="alert">
+                На витрине пока нет товаров
+            </div>
+        {% endif %}
         {% for product in products %}
         {% if forloop.first %}<div class="row">{% endif %}
             <div class="card product-list-card text-center col-6" >
                 <a href="{% url 'product' product.id %}">
-                        <img class="card-img-top" src="{{ product.image.url }}" alt="IMG-PRODUCT">
+                        {% if product.image %}
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="IMG-PRODUCT">
+                        {% endif %}
                         <div class="card-body">
                             <div class="Footnote">{{ product.name }}</div>
                             <div class="Footnote-1 mb-2">{{ product.unit_price }}</div>

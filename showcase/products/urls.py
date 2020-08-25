@@ -8,6 +8,8 @@ api_router = routers.DefaultRouter()
 api_router.register(r'products', views.ProductViewSet)
 
 urlpatterns = [
+
+    path('showcase/<str:user>', views.ProductListView.as_view(), name='showcase'),
     path('products/', views.ProductListView.as_view(), name='products'),
     path('products/<pk>/', views.ProductDetailView.as_view(), name='product'),
 

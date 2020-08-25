@@ -30,9 +30,9 @@ class ProductListView(ListView):
     template_name = 'product_list.html'
 
     def get_queryset(self):
-        queryset = super(ProductListView, self).get_queryset()
-        queryset = queryset.filter(active=True)
-        return queryset
+        if self.kwargs['user']:
+            return super(ProductListView, self).get_queryset().filter(owner__username=self.kwargs['user'],  active=True)
+        return super(ProductListView, self).get_queryset().filter(active=True)
 
 class ProductDetailView(DetailView):
 
