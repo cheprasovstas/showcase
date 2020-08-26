@@ -23,6 +23,11 @@ GIT:  pull
     cd /var/showcase/showcase;
     git fetch origin develop;
     git pull origin develop;
+    
+GIT:  push
+    cd /var/showcase/showcase;
+    git push origin develop
+
 
 django commands start:
                 cd /var/showcase/showcase/showcase/;
