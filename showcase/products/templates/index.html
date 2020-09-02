@@ -2,43 +2,27 @@
 {% load i18n %}
 
 {% block head %}
-<meta name="google-signin-client_id" content="357013688268-suer89ruerok5v05m28ab38gfffrs656.apps.googleusercontent.com">
+  {% load staticfiles %}
+  <meta name="google-signin-client_id" content="357013688268-suer89ruerok5v05m28ab38gfffrs656.apps.googleusercontent.com">
 {% endblock %}
 
 {% block content %}
 
-    <div class="content">
-      <ul class="notifications">
-        {% for notice in notifications %}
-          {% include 'notifications/notice.html' %}
-        {% endfor %}
-      </ul>
+   <div class="jumbotron text-center">
+      <h1>Здравствуйте!</h1>
+      <p>Поделитесь ссылкой на каталог с вашими клиентами</p>
+   </div>
 
-    </div>
-
-  <div id="my-signin2"></div>
-  <script>
-    function onSuccess(googleUser) {
-      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-    }
-    function onFailure(error) {
-      console.log(error);
-    }
-    function renderButton() {
-      gapi.signin2.render('my-signin2', {
-        'scope': 'profile email',
-        'width': 240,
-        'height': 50,
-        'longtitle': true,
-        'theme': 'dark',
-        'onsuccess': onSuccess,
-        'onfailure': onFailure
-      });
-    }
-  </script>
-
-  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-6 text-center">
+            <a href="{% url 'admin:index' %}" class="btn btn-outline-dark btn-block mt-3 pb-4 pt-4">Редактировать каталог</a>
+          </div>
+          <div class="col-sm-6 text-center">
+            <a href="{% url 'showcase'  request.user.username  %}" class="btn btn-outline-dark btn-block mt-3 pb-4 pt-4">Посмотреть каталог</a>
+          </div>
+      </div>
+  </div>
 
 
 {% endblock %}

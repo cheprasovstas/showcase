@@ -1,10 +1,20 @@
 from rest_framework import viewsets
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from products.models import Product
 from products.serializers import ProductSerializer
+from django.urls import reverse
+
+def index(request):
+    if request.user.is_authenticated:
+        return render(request, 'index.html')
+    else:
+        return HttpResponseRedirect(reverse('admin:login'))
+
+
+    # return HttpResponseRedirect(reverse('events'))
 
 
 class ProductViewSet(viewsets.ModelViewSet):
