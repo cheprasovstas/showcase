@@ -30,17 +30,16 @@ GIT:  push
 
 
 django commands start:
+                export SERVER_NAME=weekl-app.com;
+                export SERVER_PORT=8000;
+                export DATABASE_HOST=check-in.vps-cheprasov.host4g.ru;
+                export DATABASE_PORT=5432;
+                export DATABASE_USER=showcase;
+                export 'DATABASE_PASSWORD=!QW@1qw2';
                 cd /var/showcase/showcase/showcase/;
                 source /root/djangoenv/bin/activate;
                 python manage.py runserver 0.0.0.0:9000 &
 
-                    env:
-                        export SERVER_NAME=weekl-app.com;
-                        export SERVER_PORT=8000;
-                        export DATABASE_HOST=check-in.vps-cheprasov.host4g.ru;
-                        export DATABASE_PORT=5432;
-                        export DATABASE_USER=showcase;
-                        export 'DATABASE_PASSWORD=!QW@1qw2';
                                                 
                         set SERVER_NAME=weekl-app.com
                         set SERVER_PORT=8000
