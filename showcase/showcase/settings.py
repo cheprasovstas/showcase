@@ -33,7 +33,7 @@ SECRET_KEY = ')jitn9aaaotd^*uutj(8l!ms*amas7!oz5np%ef-66ny%^9ddn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost','principi-market.ru','check-in.vps-cheprasov.host4g.ru','weekl-app.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'weekl-app.com', 'kish.weekl-app.com']
 
 
 # Application definition
