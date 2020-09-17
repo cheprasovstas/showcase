@@ -36,14 +36,14 @@ django commands start:
 
                     env:
                         export SERVER_NAME=weekl-app.com;
-                        export SERVER_PORT=8000;
+                        export SERVER_PORT=9000;
                         export DATABASE_HOST=check-in.vps-cheprasov.host4g.ru;
                         export DATABASE_PORT=5432;
                         export DATABASE_USER=showcase;
                         export 'DATABASE_PASSWORD=!QW@1qw2';
                                                 
                         set SERVER_NAME=weekl-app.com
-                        set SERVER_PORT=8000
+                        set SERVER_PORT=9000
                         set DATABASE_HOST=check-in.vps-cheprasov.host4g.ru
                         set DATABASE_PORT=5432
                         set DATABASE_USER=showcase
