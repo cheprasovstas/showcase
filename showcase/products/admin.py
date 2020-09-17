@@ -12,11 +12,12 @@ def make_unpublished(modeladmin, request, queryset):
 make_unpublished.short_description = "Deactive"
 
 class ProductAdmin(admin.ModelAdmin):
+    exclude = ('id', 'owner',)
     list_filter = (
         ('active', admin.BooleanFieldListFilter),
     )
-    exclude = ('id', 'owner',)
     list_display = ('name', 'active', 'price', 'unit_price')
+    list_editable = ('active', 'price')
     actions = [make_published, make_unpublished]
 
     def save_model(self, request, obj, form, change):
