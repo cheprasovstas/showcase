@@ -14,7 +14,13 @@ urlpatterns = [
     path('products/', views.ProductListView.as_view(), name='products'),
     path('products/<pk>/', views.ProductDetailView.as_view(), name='product'),
 
+    path('accounts/', include('django_registration.backends.activation.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+
     path('api/', include(api_router.urls)),
+
+    url('', include('social_django.urls', namespace='social')),
+
 ]
 
 

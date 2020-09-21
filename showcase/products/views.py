@@ -11,7 +11,7 @@ def index(request):
     if request.user.is_authenticated:
         return render(request, 'index.html')
     else:
-        return HttpResponseRedirect(reverse('admin:login'))
+        return HttpResponseRedirect(reverse('login'))
 
 
     # return HttpResponseRedirect(reverse('events'))

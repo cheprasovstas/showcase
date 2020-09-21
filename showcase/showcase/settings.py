@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'phonenumber_field',
 #    'rest_registration',
     'django_filters',
-#    'social_django',
+    'django_registration',
+    'social_django',
 #    'notifications',
 #    'django_apscheduler',
 #    'push_notifications',
@@ -151,3 +152,18 @@ MEDIA_ROOT = (
 )
 
 MEDIA_URL = '/media/'
+
+
+# Authentication
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '357013688268-suer89ruerok5v05m28ab38gfffrs656.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'awmcQD6xT6vl4bUTozXLeqVa'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['https://www.googleapis.com/auth/userinfo.email']
+
+
+#Login
+LOGIN_REDIRECT_URL = '/'

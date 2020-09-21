@@ -2,48 +2,50 @@
 {% load i18n %}
 
 {% block content %}
-<form method="post" action=".">
-  {% csrf_token %}
-  <!--div class="form-group">
-    {{ form.username.errors }}
-    <label for="{{ form.username.id_for_label }}">{% trans "Username" %}</label>
-    {{ form.username }}
-    <small id="usernameHelp" class="form-text text-muted">{{ form.username.help_text }}</small>
-  </div>
-  <script type="text/javascript">
-    var element = document.getElementById("id_username");
-    element.classList.add("form-control");
-  </script-->
-  <div class="form-group">
-    {{ form.email.errors }}
-    <label for="{{ form.email.id_for_label }}">{% trans "Email" %}</label>
-    {{ form.email }}
-    <small id="emailHelp" class="form-text text-muted">{{ form.email.help_text }}</small>
-  </div>
-  <script type="text/javascript">
-    var element = document.getElementById("id_email");
-    element.classList.add("form-control");
-  </script>
-  <div class="form-group">
-    {{ form.password1.errors }}
-    <label for="{{ form.password1.id_for_label }}">{% trans "Password" %}</label>
-    {{ form.password1 }}
-    <small id="password1Help" class="form-text text-muted">{{ form.password1.help_text|safe }}</small>
-  </div>
-  <script type="text/javascript">
-    var element = document.getElementById("id_password1");
-    element.classList.add("form-control");
-  </script>
-  <div class="form-group">
-    {{ form.password2.errors }}
-    <label for="{{ form.password2.id_for_label }}">{% trans "Password confirmation" %}</label>
-    {{ form.password2 }}
-    <small id="password2Help" class="form-text text-muted">{{ form.password2.help_text|safe }}</small>
-  </div>
-  <script type="text/javascript">
-    var element = document.getElementById("id_password2");
-    element.classList.add("form-control");
-  </script>
-  <button type="submit" class="btn btn-primary">{% trans 'Submit' %}</button>
-</form>
+<div class="content-block">
+  <form method="post" action=".">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ form.username.errors }}
+      <label for="{{ form.username.id_for_label }}">{% trans "Username" %}</label>
+      {{ form.username }}
+      <small id="usernameHelp" class="form-text text-muted">{{ form.username.help_text }}</small>
+    </div>
+    <script type="text/javascript">
+      var element = document.getElementById("id_username");
+      element.classList.add("form-control");
+    </script>
+    <div class="form-group">
+      {{ form.email.errors }}
+      <label for="{{ form.email.id_for_label }}">{% trans "Email" %}</label>
+      {{ form.email }}
+      <small id="emailHelp" class="form-text text-muted">{{ form.email.help_text }}</small>
+    </div>
+    <script type="text/javascript">
+      var element = document.getElementById("id_email");
+      element.classList.add("form-control");
+    </script>
+    <div class="form-group">
+      {{ form.password1.errors }}
+      <label for="{{ form.password1.id_for_label }}">{% trans "Password" %}</label>
+      {{ form.password1 }}
+      <small id="password1Help" class="form-text text-muted">{{ form.password1.help_text|safe }}</small>
+    </div>
+    <script type="text/javascript">
+      var element = document.getElementById("id_password1");
+      element.classList.add("form-control");
+    </script>
+    <div class="form-group">
+      {{ form.password2.errors }}
+      <label for="{{ form.password2.id_for_label }}">{% trans "Password confirmation" %}</label>
+      {{ form.password2 }}
+      <small id="password2Help" class="form-text text-muted">{{ form.password2.help_text|safe }}</small>
+    </div>
+    <script type="text/javascript">
+      var element = document.getElementById("id_password2");
+      element.classList.add("form-control");
+    </script>
+    <button type="submit" class="btn btn-primary">{% trans 'Submit' %}</button>
+  </form>
+</div>
 {% endblock %}
