@@ -9,9 +9,10 @@ from django.urls import reverse
 
 def index(request):
     if request.user.is_authenticated:
-        return render(request, 'index.html')
+#        return render(request, 'index.html')
+        return HttpResponseRedirect(reverse('showcase', kwargs={'user': request.user.username}))
     else:
-        return HttpResponseRedirect(reverse('admin:login'))
+        return HttpResponseRedirect(reverse('login'))
 
 
     # return HttpResponseRedirect(reverse('events'))
