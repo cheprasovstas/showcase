@@ -28,9 +28,12 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link rel="stylesheet" href="{% static 'showcase/css/floating_label.css' %}" />
 
+    {# fontawesome #}
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}" />
+
     {# tempusdominus #}
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+    <!--script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" /-->
 
     {# fications #}
 
@@ -58,7 +61,38 @@
   <body>
     <div>
         {% include "messages.html"  with messages=messages %}
-        {% block top_toolbar %} {% endblock %}
+        {% block top_toolbar %}
+          <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                <!--a class="navbar-brand" href="#">Navbar</a-->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                    {% if user.is_authenticated %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  {% trans "Menu" %}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <!--a class="dropdown-item" href="{% url 'showcase'  request.user.username  %}">{% trans "Catalog" %}</a-->
+                                  <a class="dropdown-item" href="{% url 'admin:index' %}">{% trans "Edit" %}</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> {% trans "Logout" %}</a>
+                                </div>
+                            </li>
+                    {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'django_registration_register' %}"><i class="fas fa-user"></i>  {% trans "Sing Up" %}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> {% trans "Login" %}</a>
+                            </li>
+                    {% endif %}
+                    </ul>
+                </div>
+          </nav>
+        {% endblock %}
         {% block content %}{% endblock %}
     </div>
   </body>
