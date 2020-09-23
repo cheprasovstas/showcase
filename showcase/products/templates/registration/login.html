@@ -5,15 +5,29 @@
     {% load staticfiles %}
 {% endblock %}
 
+{% block top_toolbar %}
+{% endblock %}
+
 {% block content %}
 <div class="content-block">
-    <h5 class="text-center Title-2">{% trans "Sign In" %}</h5>
-    <form method="post" action=".">
+    <h5 class="text-center Title-2 mt-5 mb-5">{% trans "My Shop" %}</h5>
+    <form method="post" action="."  class="needs-validation post-form" novalidate>
       {% csrf_token %}
       <div class="form-group form-label-group">
         {{ form.username.errors }}
         {{ form.username }}
-        <label for="{{ form.username.id_for_label }}">{% trans "Username" %}</label>
+        <label for="{{ form.username.id_for_label }}">{% trans "Phone number" %}</label>
+        <div class="invalid-feedback">
+            {% trans "Contact phone number required, format: +7(123) 456-78-90" %}
+        </div>
+        <script>
+                                      var phones = [{ "mask": "7##########"}];
+                                      $('#id_username').inputmask({
+                                                mask: phones,
+                                                greedy: false,
+                                                definitions: { '#': { validator: "[0-9]", cardinality: 1}}
+                                      });
+        </script>
       </div>
       <script type="text/javascript">
         var element = document.getElementById("id_username");
@@ -39,7 +53,7 @@
     <hr class="my-4">
 
     <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-google login-btn btn-block btn-lg">
-          <i class="fa fa-google">
+          <i class="fab fa-google"></i>
           </i> Sign in with <b>Google</b>
     </a>
 

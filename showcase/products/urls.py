@@ -17,6 +17,9 @@ urlpatterns = [
     path('accounts/', include('django_registration.backends.activation.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 
+    path('setlang/', views.lang, name='setlang'),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
+
     path('api/', include(api_router.urls)),
 
     url('', include('social_django.urls', namespace='social')),

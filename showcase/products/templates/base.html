@@ -16,6 +16,7 @@
     <script src="{% static 'js/jquery-3.4.1.slim.min.js' %}"></script>
     <script src="{% static 'js/jquery-ui-1.12.1/jquery-ui.js' %}"></script>
     <script src="{% static 'showcase/js/floating_label.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.5/jquery.inputmask.min.js"></script>
 
     {# bootstrap #}
     <!--link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" crossorigin="anonymous"-->
@@ -63,23 +64,22 @@
         {% include "messages.html"  with messages=messages %}
         {% block top_toolbar %}
           <nav class="navbar navbar-expand-sm navbar-light bg-light">
-                <!--a class="navbar-brand" href="#">Navbar</a-->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#"><i class="fas fa-home"></i> {% trans "My Shop" %}</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
                     {% if user.is_authenticated %}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  {% trans "Menu" %}
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  <!--a class="dropdown-item" href="{% url 'showcase'  request.user.username  %}">{% trans "Catalog" %}</a-->
-                                  <a class="dropdown-item" href="{% url 'admin:index' %}">{% trans "Edit" %}</a>
-                                  <div class="dropdown-divider"></div>
-                                  <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> {% trans "Logout" %}</a>
-                                </div>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'admin:index' %}">{% trans "Edit" %}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> {% trans "Logout" %}</a>
                             </li>
                     {% else %}
                             <li class="nav-item">

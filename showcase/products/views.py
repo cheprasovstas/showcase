@@ -54,3 +54,7 @@ class ProductDetailView(DetailView):
     def get_object(self, *args, **kwargs):
         product = super(ProductDetailView, self).get_object(*args, **kwargs)
         return product
+
+# Сменить локализацию
+def lang(request):
+    return render(request, 'setlang.html')
