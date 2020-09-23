@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf.urls import include, url
 from rest_framework import routers
-
+from django_registration.backends.one_step.views import RegistrationView
 from products import views
 
 api_router = routers.DefaultRouter()
@@ -14,7 +14,10 @@ urlpatterns = [
     path('products/', views.ProductListView.as_view(), name='products'),
     path('products/<pk>/', views.ProductDetailView.as_view(), name='product'),
 
-    path('accounts/', include('django_registration.backends.activation.urls')),
+    path('accounts/register/',
+        views.RegistrationView.as_view(success_url='/'),
+        name='django_registration_register'),
+    path('accounts/', include('django_registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 
     path('setlang/', views.lang, name='setlang'),

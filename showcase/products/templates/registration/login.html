@@ -6,11 +6,18 @@
 {% endblock %}
 
 {% block top_toolbar %}
+          <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#"><i class="fas fa-home"></i> {% trans "My Shop" %}</a>
+                        </li>
+                    </ul>
+          </nav>
 {% endblock %}
 
 {% block content %}
 <div class="content-block">
-    <h5 class="text-center Title-2 mt-5 mb-5">{% trans "My Shop" %}</h5>
+    <h5 class="text-center Title-2 mt-2 mb-4">{% trans "Login" %}</h5>
     <form method="post" action="."  class="needs-validation post-form" novalidate>
       {% csrf_token %}
       <div class="form-group form-label-group">
@@ -25,7 +32,8 @@
                                       $('#id_username').inputmask({
                                                 mask: phones,
                                                 greedy: false,
-                                                definitions: { '#': { validator: "[0-9]", cardinality: 1}}
+                                                definitions: { '#': { validator: "[0-9]", cardinality: 1}},
+                                                placeholder: ''
                                       });
         </script>
       </div>
