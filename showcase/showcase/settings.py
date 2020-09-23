@@ -131,7 +131,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -164,7 +163,26 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '357013688268-suer89ruerok5v05m28ab38gfffrs656.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'awmcQD6xT6vl4bUTozXLeqVa'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['https://www.googleapis.com/auth/userinfo.email']
 
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 4,
+        }
+    },
+]
 
 #Login
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+
+
+# list of activated languages
+
+LANGUAGE_CODE = 'ru'
+
+LANGUAGES = (
+        ('ru', "Russian"),
+        ('en', "English"),
+)

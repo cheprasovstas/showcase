@@ -6,6 +6,7 @@ from django.views.generic.detail import DetailView
 from products.models import Product
 from products.serializers import ProductSerializer
 from django.urls import reverse
+from django_registration.backends.one_step.views import RegistrationView
 
 def index(request):
     if request.user.is_authenticated:
@@ -54,3 +55,10 @@ class ProductDetailView(DetailView):
     def get_object(self, *args, **kwargs):
         product = super(ProductDetailView, self).get_object(*args, **kwargs)
         return product
+
+# Сменить локализацию
+def lang(request):
+    return render(request, 'setlang.html')
+
+class RegistrationViewCustom(RegistrationView):
+    form_class = None

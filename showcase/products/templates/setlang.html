@@ -2,17 +2,24 @@
 {% load i18n %}
 
 {% block content %}
-{% get_available_languages as languages %}
+<div class="content-block">
+  {% get_available_languages as languages %}
 
-{% trans 'Change your locale' %}:
-<form action="/i18n/setlang/" method="POST">
-  {% csrf_token %}
-  <input name="next" type="hidden" value="/checkin/" /><br/>
-  <select name="language">
-    {% for lang in languages %}
-      <option value="{{ lang.0 }}">{{ lang.1 }}</option>
-    {% endfor %}
-  </select><br/>
-  <input type="submit" value="{% trans 'change' %}" />
-</form>
+  <form action="/i18n/setlang/" method="POST">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="/" /><br/>
+    <div class="form-group">
+      <label for="language">{% trans 'Change your locale' %}</label>
+      <select name="language" class="form-control" id="language">
+        {% for lang in languages %}
+          <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+        {% endfor %}
+      </select><br/>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary btn-block btn-lg" value="{% trans 'Change language' %}" />
+    </div>
+
+  </form>
+</div>
 {% endblock %}
