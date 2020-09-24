@@ -2,14 +2,19 @@ from django.contrib import admin
 from products.models import Product, Images
 
 
-
 def make_published(modeladmin, request, queryset):
     queryset.update(active=True)
+
+
 make_published.short_description = "Active"
+
 
 def make_unpublished(modeladmin, request, queryset):
     queryset.update(active=False)
+
+
 make_unpublished.short_description = "Deactive"
+
 
 class ProductAdmin(admin.ModelAdmin):
     exclude = ('id', 'owner',)
@@ -30,5 +35,6 @@ class ProductAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return qs
         return qs.filter(owner=request.user)
+
 
 admin.site.register(Product, ProductAdmin)

@@ -3,6 +3,7 @@ from django.conf.urls import include, url
 from rest_framework import routers
 from django_registration.backends.one_step.views import RegistrationView
 from products import views
+from products import forms
 
 api_router = routers.DefaultRouter()
 api_router.register(r'products', views.ProductViewSet)
@@ -15,7 +16,7 @@ urlpatterns = [
     path('products/<pk>/', views.ProductDetailView.as_view(), name='product'),
 
     path('accounts/register/',
-        views.RegistrationView.as_view(success_url='/'),
+        views.RegistrationView.as_view(success_url='/', form_class=forms.RegistrationFormCustom),
         name='django_registration_register'),
     path('accounts/', include('django_registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),

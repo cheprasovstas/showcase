@@ -8,15 +8,12 @@ from products.serializers import ProductSerializer
 from django.urls import reverse
 from django_registration.backends.one_step.views import RegistrationView
 
+
 def index(request):
     if request.user.is_authenticated:
-#        return render(request, 'index.html')
         return HttpResponseRedirect(reverse('showcase', kwargs={'user': request.user.username}))
     else:
         return HttpResponseRedirect(reverse('login'))
-
-
-    # return HttpResponseRedirect(reverse('events'))
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -34,6 +31,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 #        event_id = self.kwargs['event_id']
 #        serializer.save(event_id=event_id)
 
+
 class ProductListView(ListView):
 
     model = Product
@@ -46,6 +44,7 @@ class ProductListView(ListView):
             return super(ProductListView, self).get_queryset().filter(owner__username=self.kwargs['user'],  active=True)
         return super(ProductListView, self).get_queryset().filter(active=True)
 
+
 class ProductDetailView(DetailView):
 
     model = Product
@@ -56,9 +55,11 @@ class ProductDetailView(DetailView):
         product = super(ProductDetailView, self).get_object(*args, **kwargs)
         return product
 
+
 # Сменить локализацию
 def lang(request):
     return render(request, 'setlang.html')
+
 
 class RegistrationViewCustom(RegistrationView):
     form_class = None
