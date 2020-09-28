@@ -14,7 +14,7 @@ python -m pip install Django==2.2.14
 # -- https://github.com/jazzband/django-ical                --pip install django-ical
 
 JS:
-    https://github.com/RobinHerbots/Inputmask?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_library
+    https://github.com/RobinHerbots/Inputmask
 
 
 GIT:   
