@@ -13,8 +13,8 @@ python -m pip install Django==2.2.14
 # -- https://github.com/jazzband/django-push-notifications  --pip install django-push-notifications
 # -- https://github.com/jazzband/django-ical                --pip install django-ical
 
-
-https://startbootstrap.com/snippets/login/
+JS:
+    https://github.com/RobinHerbots/Inputmask?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_library
 
 
 GIT:   
@@ -51,3 +51,7 @@ django commands start:
                         set DATABASE_PORT=5432
                         set DATABASE_USER=showcase
                         set DATABASE_PASSWORD=!QW@1qw2
+
+django commands translate:
+    django-admin makemessages -l ru
+    django-admin compilemessages
