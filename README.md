@@ -55,3 +55,6 @@ django commands start:
 django commands translate:
     django-admin makemessages -l ru
     django-admin compilemessages
+    
+    
+
