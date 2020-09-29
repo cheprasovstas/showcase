@@ -50,11 +50,34 @@ django commands start:
                         set DATABASE_HOST=check-in.vps-cheprasov.host4g.ru
                         set DATABASE_PORT=5432
                         set DATABASE_USER=showcase
-                        set DATABASE_PASSWORD=!QW@1qw2
+                        set DATABASE_PASSWORD='!QW@1qw2'
 
 django commands translate:
     django-admin makemessages -l ru
     django-admin compilemessages
     
+    
+    
+    server {
+        listen 80;
+        server_name kish.*;
+
+        location /static {
+                root /var/showcase/showcase/showcase/products;
+        }
+
+        location /media {
+                root /var/showcase/showcase/showcase;
+        }
+
+        location / {
+                proxy_pass http://127.0.0.1:9000/;
+                proxy_redirect off;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+
+    }
     
 

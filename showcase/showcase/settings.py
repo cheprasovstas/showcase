@@ -31,7 +31,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ')jitn9aaaotd^*uutj(8l!ms*amas7!oz5np%ef-66ny%^9ddn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'weekl-app.com', 'kish.weekl-app.com']
 
