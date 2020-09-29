@@ -64,15 +64,17 @@
         {% include "messages.html"  with messages=messages %}
         {% block top_toolbar %}
           <nav class="navbar navbar-expand-sm navbar-light bg-light">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
                             <a class="nav-link" href="/"><i class="fas fa-home"></i> {% trans "My Shop" %}</a>
                         </li>
                     </ul>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                        </ul>
                     <ul class="navbar-nav">
                     {% if user.is_authenticated %}
                             <li class="nav-item">
