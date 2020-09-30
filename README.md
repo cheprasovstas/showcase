@@ -35,6 +35,8 @@ GIT:  push
     git push origin develop
 
 
+virtualenv env
+
 django commands start:
                 cd /var/showcase
                 source ./env/bin/activate;
