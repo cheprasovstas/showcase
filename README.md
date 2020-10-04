@@ -42,18 +42,3 @@ django commands start:
                 source ./env/bin/activate;
                 cd /var/showcase/showcase/showcase/;
                 python manage.py runserver 0.0.0.0:9000 &
-
-                    env:
-                        export SERVER_NAME=weekl-app.com;
-                        export SERVER_PORT=9000;
-                        export DATABASE_HOST=check-in.vps-cheprasov.host4g.ru;
-                        export DATABASE_PORT=5432;
-                        export DATABASE_USER=showcase;
-                        export 'DATABASE_PASSWORD=!QW@1qw2';
-                                                
-                        set SERVER_NAME=weekl-app.com
-                        set SERVER_PORT=9000
-                        set DATABASE_HOST=check-in.vps-cheprasov.host4g.ru
-                        set DATABASE_PORT=5432
-                        set DATABASE_USER=showcase
-                        set DATABASE_PASSWORD=!QW@1qw2

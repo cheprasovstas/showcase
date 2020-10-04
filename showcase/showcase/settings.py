@@ -95,19 +95,19 @@ WSGI_APPLICATION = 'showcase.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASE_HOST = get_env_value('DATABASE_HOST')
-DATABASE_PORT = get_env_value('DATABASE_PORT')
-DATABASE_USER = get_env_value('DATABASE_USER')
-DATABASE_PASSWORD = get_env_value('DATABASE_PASSWORD')
+#DATABASE_HOST = get_env_value('DATABASE_HOST')
+#DATABASE_PORT = get_env_value('DATABASE_PORT')
+#DATABASE_USER = get_env_value('DATABASE_USER')
+#DATABASE_PASSWORD = get_env_value('DATABASE_PASSWORD')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'showcase',
-        'USER': DATABASE_USER,
-        'PASSWORD': DATABASE_PASSWORD,
-        'HOST': DATABASE_HOST,
+        'USER': 'showcase',
+        'PASSWORD': '!QW@1qw2',
+        'HOST': 'localhost',
         # 'TIME_ZONE': 'UTC',
-        'PORT': DATABASE_PORT,
+        'PORT': '5432',
     }
 }
 
