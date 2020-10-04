@@ -38,7 +38,7 @@ GIT:  push
 virtualenv env
 
 django commands start:
-                cd /var/showcase
+                cd /var/showcase;
                 source ./env/bin/activate;
                 cd /var/showcase/showcase/showcase/;
                 python manage.py runserver 0.0.0.0:9000 &
