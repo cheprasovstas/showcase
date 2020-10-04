@@ -1,9 +1,9 @@
 libs:
 python -m pip install Django==2.2.14
- -- https://django-rest-registration.readthedocs.io/en/latest/index.html --pip install django-rest-registration
+     -- https://django-rest-registration.readthedocs.io/en/latest/index.html --pip install django-rest-registration
  -- https://github.com/stefanfoulis/django-phonenumber-field  --pip install django-phonenumber-field
      -- https://github.com/django-money/django-money --pip install django-money
-# -- URL=https://django-filter.readthedocs.io/en/master/guide/install.html  --pip install django-filter
+ -- URL=https://django-filter.readthedocs.io/en/master/guide/install.html  --pip install django-filter
 # -- URL=https://django-recurrence.readthedocs.io/en/latest/index.html  --pip install django-recurrence
  -- https://django-registration.readthedocs.io/en/3.0.1/install.html --pip install django-registration
  -- pip install psycopg2,psycopg2-binary
