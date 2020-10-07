@@ -1,7 +1,7 @@
 libs:
 python -m pip install Django==2.2.14
      -- https://django-rest-registration.readthedocs.io/en/latest/index.html --pip install django-rest-registration
- -- https://github.com/stefanfoulis/django-phonenumber-field  --pip install django-phonenumber-field
+ -- https://github.com/stefanfoulis/django-phonenumber-field  --pip install django-phonenumber-field[phonenumbers]
      -- https://github.com/django-money/django-money --pip install django-money
  -- URL=https://django-filter.readthedocs.io/en/master/guide/install.html  --pip install django-filter
 # -- URL=https://django-recurrence.readthedocs.io/en/latest/index.html  --pip install django-recurrence
@@ -42,3 +42,10 @@ django commands start:
                 source ./env/bin/activate;
                 cd /var/showcase/showcase/showcase/;
                 python manage.py runserver 0.0.0.0:9000 &
+                
+                
+                
+                
+                ALTER ROLE showcase SET client_encoding TO 'utf8';
+                ALTER ROLE showcase SET default_transaction_isolation TO 'read committed';
+                ALTER ROLE showcase SET timezone TO 'UTC';   
