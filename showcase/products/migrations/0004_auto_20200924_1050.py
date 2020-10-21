@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='image',
-            field=models.ImageField(blank=True, upload_to=products.models.upload_to),
+            field=models.ImageField(blank=True, upload_to=products.models.upload_product_image_to),
         ),
         migrations.CreateModel(
             name='ShowcaseInfo',

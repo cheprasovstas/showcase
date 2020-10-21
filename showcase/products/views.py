@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from products.models import Product
+from products.models import Product, Showcase, ShowcaseInfo
 from products.serializers import ProductSerializer
 from django.urls import reverse
 from django_registration.backends.one_step.views import RegistrationView
@@ -43,6 +43,15 @@ class ProductListView(ListView):
         if 'user' in self.kwargs:
             return super(ProductListView, self).get_queryset().filter(owner__username=self.kwargs['user'],  active=True)
         return super(ProductListView, self).get_queryset().filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductListView, self).get_context_data(**kwargs)
+        showcase = Showcase.objects.filter(owner__username=self.kwargs['user']).first()
+        context['showcase'] = showcase
+#        showcaseinfo = ShowcaseInfo.objects.filter(showcase=showcase).order_by('order').all()
+        showcaseinfo = ShowcaseInfo.objects.filter(owner__username=self.kwargs['user']).order_by('order').all()
+        context['showcaseinfo'] = showcaseinfo
+        return context
 
 
 class ProductDetailView(DetailView):

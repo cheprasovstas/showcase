@@ -26,9 +26,9 @@ GIT:
     cd /var/showcase
     git clone -b develop https://cheprasovstas:NQR4Cw6JwrVcJuM@github.com/cheprasovstas/showcase.git
 GIT:  pull
-    cd /var/showcase/showcase;
-    git fetch origin develop;
-    git pull origin develop;
+        cd /var/showcase/showcase;
+        git fetch origin develop;
+        git pull origin develop;
     
 GIT:  push
     cd /var/showcase/showcase;
@@ -43,9 +43,3 @@ django commands start:
                 cd /var/showcase/showcase/showcase/;
                 python manage.py runserver 0.0.0.0:9000 &
                 
-                
-                
-                
-                ALTER ROLE showcase SET client_encoding TO 'utf8';
-                ALTER ROLE showcase SET default_transaction_isolation TO 'read committed';
-                ALTER ROLE showcase SET timezone TO 'UTC';   

@@ -29,7 +29,8 @@ class ShowcaseInfo(models.Model):
     description = models.TextField(max_length=4000, blank=True, null=True, help_text='Info block description')
     active = models.BooleanField(default=True)
     order = models.PositiveIntegerField(default='0')
-    showcase = models.ForeignKey(Showcase, help_text='Showcase', on_delete=models.SET_NULL, null=True)
+    showcase = models.ForeignKey(Showcase, help_text='Showcase', on_delete=models.SET_NULL, null=True, related_name='showcaseinfo')
+    owner = models.ForeignKey(User, help_text='Owner', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.title
@@ -43,7 +44,6 @@ class Product(models.Model):
     unit_price = models.CharField(max_length=20, help_text='Product unit price')
     active = models.BooleanField(default=True)
     image = models.ImageField(upload_to=upload_product_image_to, blank=True)
-    #    image = models.ImageField(upload_to='images/products', blank=True)
     owner = models.ForeignKey(User, help_text='Product owner', on_delete=models.SET_NULL, null=True)
 
     def save(self):

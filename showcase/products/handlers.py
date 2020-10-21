@@ -2,6 +2,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
 from django.contrib.auth.models import Group
+from products.models import Showcase
+
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def save_profile(sender, instance, created, **kwargs):
@@ -10,3 +12,5 @@ def save_profile(sender, instance, created, **kwargs):
         instance.groups.add(g1)
         instance.is_staff = True
         instance.save()
+
+        Showcase.objects.create(title=instance.username, owner=instance)
