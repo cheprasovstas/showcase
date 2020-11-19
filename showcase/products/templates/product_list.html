@@ -1,14 +1,90 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-
+{% load staticfiles %}
 
 {% block content %}
-    <div class="mt-2"></div>
+    {% if showcase %}
+    <div class="product-list-head-block">
+        <div class="product-list-block">
+            <p class="Title-2">{{ showcase.title }}</p>
+
+            {% if showcaseinfo %}
+                <div id="recipeCarousel" class="carousel slide row"  data-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for item in showcaseinfo %}
+
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <div class="menu-item col-6" >
+                                    <a href="#bannerformmodal" data-toggle="modal" data-target="#infoModal-{{ item.order }}">
+                                        <div class="mt-2 mb-2"><i class="far fa-question-circle"></i></div>
+                                        <div class="Caption-1">{{ item.title }}</div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+                {% for item in showcaseinfo %}
+                <!-- Modal -->
+                          <div class="modal fade" id="infoModal-{{ item.order }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <div class="Title-2">{{ item.title }}</div>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="Body">
+                                       {{ item.description|linebreaks }}
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-lg btn-block btn-secondary" data-dismiss="modal">Закрыть</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                {% endfor %}
+            {% endif %}
+            <script>
+                $('#recipeCarousel').carousel({
+                  interval: 10000
+                })
+
+                $('.carousel .carousel-item').each(function(){
+                    var minPerSlide = 2;
+                    var next = $(this).next();
+                    if (!next.length) {
+                    next = $(this).siblings(':first');
+                    }
+                    next.children(':first-child').clone().appendTo($(this));
+
+                    for (var i=0;i<minPerSlide;i++) {
+                        next=next.next();
+                        if (!next.length) {
+                            next = $(this).siblings(':first');
+                        }
+                        next.children(':first-child').clone().appendTo($(this));
+                      }
+                });
+            </script>
+
+
+        </div>
+    </div>
+    {% endif %}
+
     <div class="product-list-block">
         {% if not products %}
-            <div class="alert alert-primary" role="alert">
-                На витрине пока нет товаров
+            <div class="card empty-product-list text-center" >
+                <img class="card-img-top" src="{% static 'img/no-product.png' %}" alt="no-product">
+                <div class="card-body pt-0">
+                    <div class="Body">На витрине пока нет товаров</div>
+                </div>
             </div>
         {% endif %}
         {% for product in products %}
