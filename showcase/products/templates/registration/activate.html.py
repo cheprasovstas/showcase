@@ -1,8 +1,0 @@
-BBBBBBB BBBBBBBBBBB
-BBBB BBBB
-
-BBBBB BBBBBBB
-
-XXX gettext(u'Account activation failed') XXXX
-
-BBBBBBBB
