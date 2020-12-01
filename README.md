@@ -29,6 +29,9 @@ GIT:  pull
         cd /var/showcase/showcase;
         git fetch origin develop;
         git pull origin develop;
+        
+        
+        git reset --hard origin/develop
     
 GIT:  push
     cd /var/showcase/showcase;
@@ -43,3 +46,10 @@ django commands start:
                 cd /var/showcase/showcase/showcase/;
                 python manage.py runserver 0.0.0.0:9000 &
                 
+static
+    chcon -Rt httpd_sys_content_t /var/showcase/showcase/static/
+    
+    
+translate
+    django-admin makemessages -l ru
+    django-admin compilemessages

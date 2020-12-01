@@ -10,8 +10,9 @@ api_router.register(r'products', views.ProductViewSet)
 urlpatterns = [
 
     path('', views.index, name='home'),
-    path('showcase/<str:user>', views.ProductListView.as_view(), name='showcase'),
+    path('showcase/<str:user>', views.ShowCaseView.as_view(), name='showcase'),
     path('products/', views.ProductListView.as_view(), name='products'),
+    path('products/add', views.ProductEditView.as_view(), name='add_product'),
     path('products/<pk>/', views.ProductDetailView.as_view(), name='product'),
 
     path('accounts/register/',

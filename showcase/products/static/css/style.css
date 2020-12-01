@@ -58,6 +58,8 @@
    object-fit: cover;
 }
 
+/* btn */
+
 .product-card-btn{
     border-radius: 28px;
     color: #ffffff;
@@ -195,8 +197,6 @@
     color: #777;
   }
 }
-
-
 
 /* Fonts! */
 .Title-1 {

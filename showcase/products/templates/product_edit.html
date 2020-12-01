@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block head %}
+    {% load staticfiles %}
+    <title>{{ product.name }}</title>
+
+    <meta property="og:title" content="{{ product.name }}" />
+    <meta property="og:description" content="{{ product.price }} {{ product.unit_price }} {{ product.description }}" />
+    {% if product.image %}
+        <meta property="og:image" content="{{request.scheme}}://{{request.META.HTTP_HOST}}{{ product.image.url }}" />
+    {% endif %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="product-card-block">
+        <form method="post" class="post-form">
+        {% csrf_token %}
+        <div class="product-card card" >
+            {% if image %}
+                <img class="card-img-top" src="{{ image.image.url }}">
+            {% endif %}
+            <div class="form-group form-label-group">
+                {{ form.image }}
+                <label for="{{ form.image.id_for_label }}">{% trans "Product image" %}</label>
+                <small class="form-text text-danger">{{ form.image.errors }}</small>
+            </div>
+
+            <div class="card-body">
+                <div class="form-group form-label-group">
+                    {{ form.name }}
+                    <label for="{{ form.name.id_for_label }}">{% trans "Product name" %}</label>
+                    <small class="form-text text-danger">{{ form.name.errors }}</small>
+                </div>
+                <div class="form-group form-label-group">
+                    {{ form.price }}
+                    <label for="{{ form.price.id_for_label }}">{% trans "Price" %}</label>
+                    <small class="form-text text-danger">{{ form.price.errors }}</small>
+                </div>
+                <div class="form-group form-label-group">
+                    {{ form.unit_price }}
+                    <label for="{{ form.unit_price.id_for_label }}">{% trans "Unit price" %}</label>
+                    <small class="form-text text-danger">{{ form.unit_price.errors }}</small>
+                </div>
+                <div class="form-group form-label-group">
+                    {{ form.active }}
+                    <label for="{{ form.active.id_for_label }}">{% trans "Product name" %}</label>
+                    <small class="form-text text-danger">{{ form.active.errors }}</small>
+                </div>
+                <div class="form-group form-label-group">
+                    {{ form.description }}
+                    <label for="{{ form.description.id_for_label }}">{% trans "Product description" %}</label>
+                    <small class="form-text text-danger">{{ form.description.errors }}</small>
+                </div>
+
+
+                <script type="text/javascript">
+                    var element = document.getElementById("id_username");
+                    element.classList.add("form-control");
+                    element.setAttribute("type", "email")
+                </script>
+            </div>
+
+        <button type="submit" class="btn product-card-btn">{% trans "Save" %}</button>
+        </div>
+        </form>
+    </div>
+    {% if product.owner %}
+        <a href="{% url 'showcase'  product.owner.username  %}" class="btn btn-block product-card-btn-back mt-1"><i class="fas fa-chevron-left"></i> {% trans "Вернуться в каталог" %}</a>
+    {% endif %}
+{% endblock %}
