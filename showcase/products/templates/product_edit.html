@@ -45,12 +45,12 @@
                 </div>
                 <div class="form-group form-label-group">
                     {{ form.active }}
-                    <label for="{{ form.active.id_for_label }}">{% trans "Product name" %}</label>
+                    <label for="{{ form.active.id_for_label }}">{% trans "Active" %}</label>
                     <small class="form-text text-danger">{{ form.active.errors }}</small>
                 </div>
-                <div class="form-group form-label-group">
-                    {{ form.description }}
+                <div class="form-group form-label-grou">
                     <label for="{{ form.description.id_for_label }}">{% trans "Product description" %}</label>
+                    {{ form.description }}
                     <small class="form-text text-danger">{{ form.description.errors }}</small>
                 </div>
 
